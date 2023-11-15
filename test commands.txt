@@ -7,5 +7,8 @@ ffmpeg -y -i input.mp4 -vf "crop=in_w/3:in_h:640:0" -c:a copy output.mp4
 
 ffmpeg -y -i input.mp4 -vf "crop=in_w/3:in_h:640:0,scale=1080:1920" -c:a copy output.mp4
 
+ffmpeg -y -i input.mp4 -vf "crop=in_w/3:in_h:640:0,scale=2160:3840" -c:a copy output.mp4
 
+ffmpeg -y -hwaccel cuda -c:v h264_cuvid -i input.mp4 -vf "crop=in_w/3:in_h:640:0,scale=2160:3840" -c:a copy -c:v h264_nvenc output.mp4
 
+ffmpeg -y -hwaccel cuda -c:v h264_cuvid -i input.mp4 -vf "crop=in_w/3:in_h:640:0,scale=2160:3840" -b:v 50M -c:a copy -c:v h264_nvenc output.mp4
