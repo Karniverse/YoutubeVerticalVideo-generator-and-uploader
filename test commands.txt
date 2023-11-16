@@ -25,7 +25,10 @@ ffmpeg -y -i input.mp4 -vf "crop=380:105:59:925" -c:a copy output.mp4
 
 ffmpeg -y -i input.mp4 -filter_complex "[0:v]crop=in_w/3:in_h:640:0,scale=2160:3840[main]; [0:v]crop=380:105:59:925,scale=iw*3.5:ih*3.5[ovr]; [main][ovr]overlay=0:H-h" -c:a copy -c:v h264_nvenc -qp 0 output.mp4
 
+ffmpeg -y -i input.mp4 -filter_complex "[0:v]crop=in_w/3:in_h:640:0,scale=2160:3840[main]; [0:v]crop=380:105:59:925,scale=iw*3:ih*3[ovr1]; [0:v]crop=365:105:1505:955,scale=iw*3:ih*3[ovr2]; [main][ovr1]overlay=0:H-h[base]; [base][ovr2]overlay=W-w:H-h" -c:a copy -c:v h264_nvenc -qp 0 output.mp4
 
+
+ffmpeg -y -i input.mp4 -filter_complex "[0:v]crop=in_w/3:in_h:640:0,scale=2160:3840[main]; [0:v]crop=380:105:59:925,scale=iw*3:ih*3[ovr1]; [0:v]crop=365:105:1505:955,scale=iw*3:ih*3[ovr2]; [0:v]crop=328:114:1546:50,scale=iw*3:ih*3[ovr3]; [main][ovr1]overlay=0:H-h[base1]; [base1][ovr2]overlay=W-w:H-h[base2]; [base2][ovr3]overlay=W-w:0" -c:a copy -c:v h264_nvenc -qp 0 output.mp4
 
 
 
