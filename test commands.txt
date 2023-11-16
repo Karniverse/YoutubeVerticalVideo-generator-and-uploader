@@ -23,7 +23,7 @@ ffmpeg -y -hwaccel cuda -c:v h264_cuvid -i input.mp4 -filter_complex "[0:v]crop=
 ffmpeg -y -i input.mp4 -vf "crop=380:105:59:925" -c:a copy output.mp4
 
 
-ffmpeg -y -i input.mp4 -filter_complex "[0:v]crop=in_w/3:in_h:640:0,scale=2160:3840[main]; [0:v]crop=380:105:59:925,scale=iw*3:ih*3[ovr]; [main][ovr]overlay=0:3000" -c:a copy -c:v h264_nvenc -qp 0 output.mp4
+ffmpeg -y -i input.mp4 -filter_complex "[0:v]crop=in_w/3:in_h:640:0,scale=2160:3840[main]; [0:v]crop=380:105:59:925,scale=iw*3.5:ih*3.5[ovr]; [main][ovr]overlay=0:H-h" -c:a copy -c:v h264_nvenc -qp 0 output.mp4
 
 
 
