@@ -1,0 +1,8 @@
+ffmpeg -f dshow -i audio="Stereo Mix (Realtek High Definition Audio)" -f gdigrab -video_size 1920x1080 -framerate 60 -i desktop -profile high444p -pixel_format yuv444p -c:v h264_nvenc -qp 0 -b:v 8M zoutput.mp4
+
+ffmpeg -init_hw_device d3d11va -filter_complex ddagrab=0 -c:v h264_nvenc -cq:v 20 output.mkv
+
+ffmpeg -init_hw_device d3d11va -filter_complex ddagrab=0 -c:v h264_nvenc -cq:v 2 output.mkv
+
+
+ffmpeg -y -f dshow -i audio="Stereo Mix (Realtek High Definition Audio)" -c:a aac -b:a 192k -init_hw_device d3d11va -filter_complex ddagrab=0 -c:v h264_nvenc -cq:v 20 zoutput.mp4
